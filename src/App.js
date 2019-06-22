@@ -1,22 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.scss';
 import List from './components/List/List';
+import Button from './components/Button/Button';
 
-function App() {
-	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>Bienvedededeenidos al curso de programación de cómputo móvil</p>
+class App extends React.PureComponent {
+	onHandleButton = () => {
+		console.log('TCL: App -> onHandleButton -> onHandleButton');
+	};
+
+	render() {
+		return (
+			<div>
+				<p>¡Bienvenidos al curso de programación de cómputo móvil!</p>
 				<List items={[ 'Walter', 'Hola', 'oaxaca' ]} lastName={'Gonzalez'} />
-
-				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-					Learn React
-				</a>
-			</header>
-		</div>
-	);
+				<Button style={styles.button_green} label={'Aceptar'} onClick={this.onHandleButton} />
+			</div>
+		);
+	}
 }
 
 export default App;

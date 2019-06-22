@@ -31,6 +31,7 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.10.2"
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "node-sass-tilde-importer": "^1.0.2"
   }
 }
