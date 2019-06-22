@@ -2,30 +2,43 @@ import React from 'react';
 import styles from './App.module.scss';
 import List from './components/List/List';
 import Button from './components/Button/Button';
+import Board from './Board/Board';
 import produce from 'immer/dist/immer';
 
 class App extends React.PureComponent {
 	state = {
-		items: [ 'Walter', 'Rocio', 'Mia', 'Walter Jr' ],
-		index: 0
+		family: {
+			items: [ 'Walter', 'Rocio', 'Mia', 'Walter Jr' ],
+			index: 0
+		},
+		sports: {
+			items: [ 'Futbol', 'Beisbol', 'Basquetbol', 'Golf' ],
+			index: 0
+		}
 	};
 
-	onHandleButton = () => {
+	onHandleButton = (object) => {
+		console.log('TCL: App -> onHandleButton -> object', object);
 		const nextState = produce(this.state, (draft) => {
-			if (draft.items.length > draft.index + 1) draft.index = draft.index + 1;
-			else draft.index = 0;
+			if (draft[object].items.length > draft[object].index + 1) draft[object].index = draft[object].index + 1;
+			else draft[object].index = 0;
 		});
 		this.setState(nextState);
 	};
 
 	render() {
-		const { items, index } = this.state;
+		const { family, sports } = this.state;
 		return (
 			<div>
 				<p className={styles.title}>¡Bienvenidos al curso de programación de cómputo móvil!</p>
-				<List items={items} index={index} />
-				<Button label={'Aceptar'} onClick={this.onHandleButton} />
-				<p className={styles.result}>El nombre seleccionado es: {items[index]}</p>
+				<div className={styles.container_boards}>
+					<Board items={family.items} index={family.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('family')} />
+					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
+					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
+					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
+					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
+				</div>
+				{/* <p className={styles.result}>El nombre seleccionado es: {items[index]}</p> */}
 			</div>
 		);
 	}
