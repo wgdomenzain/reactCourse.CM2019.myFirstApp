@@ -12,7 +12,15 @@ class App extends React.PureComponent {
 			index: 0
 		},
 		sports: {
-			items: [ 'Futbol', 'Beisbol', 'Basquetbol', 'Golf' ],
+			items: [ 'Futbol', 'Beisbol', 'Basquetbol' ],
+			index: 0
+		},
+		numbers: {
+			items: [ 'Uno', 'Dos', 'Tres' ],
+			index: 0
+		},
+		drinks: {
+			items: [ 'Soda', 'Coffe' ],
 			index: 0
 		}
 	};
@@ -27,18 +35,29 @@ class App extends React.PureComponent {
 	};
 
 	render() {
-		const { family, sports } = this.state;
+		const { family, sports, numbers, drinks } = this.state;
 		return (
 			<div>
 				<p className={styles.title}>¡Bienvenidos al curso de programación de cómputo móvil!</p>
 				<div className={styles.container_boards}>
 					<Board items={family.items} index={family.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('family')} />
 					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
-					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
-					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
-					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
+					<Board items={numbers.items} index={numbers.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('numbers')} />
+					<Board items={drinks.items} index={drinks.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('drinks')} />
 				</div>
-				{/* <p className={styles.result}>El nombre seleccionado es: {items[index]}</p> */}
+				{
+					<p className={styles.result}>
+						Resultado: <br />
+						<label> {family.items[family.index]} </label>
+						<br />
+						<label> {sports.items[sports.index]} </label>
+						<br />
+						<label> {numbers.items[numbers.index]} </label>
+						<br />
+						<label> {drinks.items[drinks.index]} </label>
+						<br />
+					</p>
+				}
 			</div>
 		);
 	}
