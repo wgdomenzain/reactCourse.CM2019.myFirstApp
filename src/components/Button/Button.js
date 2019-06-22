@@ -11,9 +11,11 @@ export default class Button extends React.Component {
 		const { onClick, label, className } = this.props;
 		console.log('TCL: Button -> render -> className', className);
 		return (
-			<button onClick={onClick} className={styles.button + ' ' + className}>
-				{label}
-			</button>
+			<div className={styles.main}>
+				<button onClick={onClick} className={styles.button + ' ' + className}>
+					{label}
+				</button>
+			</div>
 		);
 	}
 }

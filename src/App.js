@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './App.module.scss';
 import List from './components/List/List';
 import Button from './components/Button/Button';
 import produce from 'immer/dist/immer';
@@ -21,10 +22,10 @@ class App extends React.PureComponent {
 		const { items, index } = this.state;
 		return (
 			<div>
-				<p>¡Bienvenidos al curso de programación de cómputo móvil!</p>
+				<p className={styles.title}>¡Bienvenidos al curso de programación de cómputo móvil!</p>
 				<List items={items} index={index} />
 				<Button label={'Aceptar'} onClick={this.onHandleButton} />
-				<p>El nombre seleccionado es: {items[index]}</p>
+				<p className={styles.result}>El nombre seleccionado es: {items[index]}</p>
 			</div>
 		);
 	}
