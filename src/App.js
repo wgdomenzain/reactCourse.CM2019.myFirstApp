@@ -1,6 +1,7 @@
 import React from 'react';
 import List from './components/List/List';
 import Button from './components/Button/Button';
+import produce from 'immer/dist/immer';
 
 class App extends React.PureComponent {
 	state = {
@@ -9,10 +10,11 @@ class App extends React.PureComponent {
 	};
 
 	onHandleButton = () => {
-		let { index, items } = this.state;
-		if (items.length > index + 1) index++;
-		else index = 0;
-		this.setState({ index: index });
+		const nextState = produce(this.state, (draft) => {
+			if (draft.items.length > draft.index + 1) draft.index = draft.index + 1;
+			else draft.index = 0;
+		});
+		this.setState(nextState);
 	};
 
 	render() {
