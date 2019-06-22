@@ -13,12 +13,20 @@
 	flex-wrap: wrap;
 	justify-content: center;
 }
+.container_add {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 16px 48px;
+}
 .result {
 	padding-top: 32px;
 	text-align: center;
 	font-weight: 500;
 	font-size: 1.2rem;
 }
+
 .button_green {
 	background: green !important;
 }

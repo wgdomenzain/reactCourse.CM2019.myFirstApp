@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './App.module.scss';
-import List from './components/List/List';
-import Button from './components/Button/Button';
+import Input from './components/Input/Input';
 import Board from './Board/Board';
+import Button from './components/Button/Button';
 import produce from 'immer/dist/immer';
 
 class App extends React.PureComponent {
@@ -22,11 +22,11 @@ class App extends React.PureComponent {
 		drinks: {
 			items: [ 'Soda', 'Coffe' ],
 			index: 0
-		}
+		},
+		input: ''
 	};
 
 	onHandleButton = (object) => {
-		console.log('TCL: App -> onHandleButton -> object', object);
 		const nextState = produce(this.state, (draft) => {
 			if (draft[object].items.length > draft[object].index + 1) draft[object].index = draft[object].index + 1;
 			else draft[object].index = 0;
@@ -34,11 +34,34 @@ class App extends React.PureComponent {
 		this.setState(nextState);
 	};
 
+	onAddButtonClick = () => {
+		const { input } = this.state;
+		const nextState = produce(this.state, (draft) => {
+			draft.family.items = draft.family.items.concat(input);
+			console.log('TCL: App -> nextState -> draft.family.items', draft.family.items);
+		});
+		this.setState(nextState);
+	};
+
+	onInputChange = (event) => {
+		const value = event.target.value;
+		console.log('TCL: App -> onInputChange -> value', value);
+		const nextState = produce(this.state, (draft) => {
+			draft.input = value;
+		});
+		this.setState(nextState);
+	};
+
 	render() {
-		const { family, sports, numbers, drinks } = this.state;
+		const { family, sports, numbers, drinks, input } = this.state;
 		return (
 			<div>
 				<p className={styles.title}>¡Bienvenidos al curso de programación de cómputo móvil!</p>
+				<div className={styles.container_add}>
+					<Input value={input} onChange={this.onInputChange} />
+					<Button label={'Agregar'} onClick={this.onAddButtonClick} />
+				</div>
+
 				<div className={styles.container_boards}>
 					<Board items={family.items} index={family.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('family')} />
 					<Board items={sports.items} index={sports.index} label={'Siguiente'} onButtonClick={() => this.onHandleButton('sports')} />
