@@ -15,6 +15,7 @@ class App extends React.PureComponent {
 			else draft.index = 0;
 		});
 		this.setState(nextState);
+		console.log('TCL: App -> onHandleButton -> nextState', nextState);
 	};
 
 	render() {
