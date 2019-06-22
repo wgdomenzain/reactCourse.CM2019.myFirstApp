@@ -16,7 +16,13 @@ class List extends React.Component {
 		return (
 			<div className={styles.main}>
 				{lastName}
-				<ul className={styles.list}>{items.map((item) => <li className={styles.item}>{item}</li>)}</ul>
+				<ul className={styles.list}>
+					{items.map((item, i) => (
+						<li key={i} className={styles.item}>
+							{item}
+						</li>
+					))}
+				</ul>
 			</div>
 		);
 	}
