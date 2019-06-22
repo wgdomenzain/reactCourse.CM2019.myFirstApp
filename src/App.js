@@ -22,7 +22,7 @@ class App extends React.PureComponent {
 		return (
 			<div>
 				<p>¡Bienvenidos al curso de programación de cómputo móvil!</p>
-				<List items={items} lastName={'Gonzalez'} />
+				<List items={items} index={index} />
 				<Button label={'Aceptar'} onClick={this.onHandleButton} />
 				<p>El nombre seleccionado es: {items[index]}</p>
 			</div>
