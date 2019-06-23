@@ -25,14 +25,14 @@ class Board extends React.Component {
 						<div className={styles.container_input}>
 							<Input type="text" value={object.input.add} onChange={onAddInputChange} />
 						</div>
-						<Button label={'Agregar'} onClick={onAddButtonClick} />
+						<Button type={'add'} onClick={onAddButtonClick} />
 					</div>
 
 					<div className={styles.group}>
 						<div className={styles.container_input}>
 							<Input type="number" value={object.input.remove} onChange={onRemoveInputChange} />
 						</div>
-						<Button label={'Remover'} onClick={onRemoveButtonClick} />
+						<Button type={'remove'} onClick={onRemoveButtonClick} />
 					</div>
 				</div>
 			</div>
