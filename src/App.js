@@ -52,6 +52,13 @@ class App extends React.PureComponent {
 		this.setState(nextState);
 	};
 
+	onRemoveItem = (index, property) => {
+		const nextState = produce(this.state, (draft) => {
+			draft[property].items.splice(index, 1);
+		});
+		this.setState(nextState);
+	};
+
 	onRemoveButtonClick = (property) => {
 		const nextState = produce(this.state, (draft) => {
 			draft[property].items.splice(draft[property].input.remove - 1, 1);
@@ -88,6 +95,7 @@ class App extends React.PureComponent {
 						onRemoveButtonClick={() => this.onRemoveButtonClick('family')}
 						onAddInputChange={(event) => this.onAddInputChange(event, 'family')}
 						onRemoveInputChange={(event) => this.onRemoveInputChange(event, 'family')}
+						onRemoveItem={(index) => this.onRemoveItem(index, 'family')}
 					/>
 					<Board
 						object={drinks}

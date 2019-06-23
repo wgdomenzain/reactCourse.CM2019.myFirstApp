@@ -9,13 +9,18 @@ class Board extends React.Component {
 
 	componentDidMount() {}
 
+	onRemoveItem = (index) => {
+		const { onRemoveItem } = this.props;
+		onRemoveItem(index);
+	};
+
 	render() {
-		const { object, onAddButtonClick, onRemoveButtonClick, onAddInputChange, onRemoveInputChange } = this.props;
+		const { object, onAddButtonClick, onRemoveButtonClick, onAddInputChange, onRemoveInputChange, onRemoveItem } = this.props;
 		return (
 			<div className={styles.main}>
 				<p className={styles.title}>{object.title}</p>
 				<div className={styles.container}>
-					<List items={object.items} index={object.index} />
+					<List items={object.items} onRemoveItem={(index) => this.onRemoveItem(index)} />
 					<div className={styles.group}>
 						<div className={styles.container_input}>
 							<Input type="text" value={object.input.add} onChange={onAddInputChange} />
