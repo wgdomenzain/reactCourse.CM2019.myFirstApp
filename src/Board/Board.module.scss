@@ -6,8 +6,9 @@
 	max-width: 500px;
 	border: 1px solid lightgray;
 	border-radius: 8px;
-	$box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
+	box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
 	margin: 16px;
+	padding: 8px;
 }
 .title {
 	font-size: 1.2rem;

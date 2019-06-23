@@ -103,6 +103,7 @@ class App extends React.PureComponent {
 						onRemoveButtonClick={() => this.onRemoveButtonClick('drinks')}
 						onAddInputChange={(event) => this.onAddInputChange(event, 'drinks')}
 						onRemoveInputChange={(event) => this.onRemoveInputChange(event, 'drinks')}
+						onRemoveItem={(index) => this.onRemoveItem(index, 'drinks')}
 					/>
 					<Board
 						object={friends}
@@ -110,6 +111,7 @@ class App extends React.PureComponent {
 						onRemoveButtonClick={() => this.onRemoveButtonClick('friends')}
 						onAddInputChange={(event) => this.onAddInputChange(event, 'friends')}
 						onRemoveInputChange={(event) => this.onRemoveInputChange(event, 'friends')}
+						onRemoveItem={(index) => this.onRemoveItem(index, 'friends')}
 					/>
 				</div>
 				<div className={styles.summary}>
