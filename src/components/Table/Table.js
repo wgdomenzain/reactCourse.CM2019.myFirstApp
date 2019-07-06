@@ -1,12 +1,7 @@
 import * as React from 'react';
-import styles from './Tables.module.scss';
-import cashoutHeader from '../../resources/jsons/cashoutHeader.json';
-import cashoutData from '../../resources/jsons/cashoutData.json';
-export default (class Tables extends React.PureComponent {
-	state = {};
+import styles from './Table.module.scss';
 
-	componentDidMount() {}
-
+export default (class Table extends React.PureComponent {
 	calculateFooter = (data, item) => {
 		switch (item.footer) {
 			case 'sum':
@@ -17,11 +12,7 @@ export default (class Tables extends React.PureComponent {
 	};
 
 	render() {
-		console.log(cashoutHeader);
-		console.log(cashoutData);
-		const headers = cashoutHeader;
-		const data = cashoutData[0].cashout;
-		console.log('TCL: Tables -> render -> data', data);
+		const { headers, data } = this.props;
 		return (
 			<div className={styles.main}>
 				<table className={styles.table}>
@@ -41,7 +32,11 @@ export default (class Tables extends React.PureComponent {
 							return (
 								<tr key={i} className={styles.row}>
 									{headers.map((header, i) => {
-										return <td className={styles.row_item}>{item[header.value]}</td>;
+										return (
+											<td key={i} className={styles.row_item}>
+												{item[header.value]}
+											</td>
+										);
 									})}
 								</tr>
 							);
@@ -50,7 +45,11 @@ export default (class Tables extends React.PureComponent {
 					<tfoot className={styles.footer}>
 						<tr className={styles.footer_row}>
 							{headers.map((header, i) => {
-								return <td className={styles.footer_item}>{this.calculateFooter(data, header)}</td>;
+								return (
+									<td key={i} className={styles.footer_item}>
+										{this.calculateFooter(data, header)}
+									</td>
+								);
 							})}
 						</tr>
 					</tfoot>

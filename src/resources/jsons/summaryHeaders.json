@@ -21,7 +21,7 @@
 	},
 	{
 		"name": "TOTAL",
-		"value": "quantity",
+		"value": "total",
 		"footer": "sum"
 	},
 	{
