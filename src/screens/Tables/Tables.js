@@ -7,6 +7,15 @@ export default (class Tables extends React.PureComponent {
 
 	componentDidMount() {}
 
+	calculateFooter = (data, item) => {
+		switch (item.footer) {
+			case 'sum':
+				return data.reduce((acc, row) => (acc += parseFloat(row[item.value])), 0);
+			default:
+				return item.footer;
+		}
+	};
+
 	render() {
 		console.log(cashoutHeader);
 		console.log(cashoutData);
@@ -38,6 +47,13 @@ export default (class Tables extends React.PureComponent {
 							);
 						})}
 					</tbody>
+					<tfoot className={styles.footer}>
+						<tr className={styles.footer_row}>
+							{headers.map((header, i) => {
+								return <td className={styles.footer_item}>{this.calculateFooter(data, header)}</td>;
+							})}
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		);
