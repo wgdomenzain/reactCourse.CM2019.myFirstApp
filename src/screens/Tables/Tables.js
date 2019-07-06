@@ -1,42 +1,42 @@
 import * as React from 'react';
 import styles from './Tables.module.scss';
-
+import cashoutHeader from '../../resources/jsons/cashoutHeader.json';
+import cashoutData from '../../resources/jsons/cashoutData.json';
 export default (class Tables extends React.PureComponent {
 	state = {};
 
 	componentDidMount() {}
 
 	render() {
+		console.log(cashoutHeader);
+		console.log(cashoutData);
+		const headers = cashoutHeader;
+		const data = cashoutData[0].cashout;
+		console.log('TCL: Tables -> render -> data', data);
 		return (
 			<div className={styles.main}>
 				<table className={styles.table}>
 					<thead className={styles.mainHeader}>
 						<tr className={styles.header}>
-							<th className={styles.header_item}>Encabezado 1</th>
-							<th className={styles.header_item}>Encabezado 2</th>
-							<th className={styles.header_item}>Encabezado 3</th>
-							<th className={styles.header_item}>Encabezado 4</th>
+							{headers.map((header, i) => {
+								return (
+									<th key={i} className={styles.header_item}>
+										{header.name}
+									</th>
+								);
+							})}
 						</tr>
 					</thead>
 					<tbody className={styles.body}>
-						<tr className={styles.row}>
-							<td className={styles.row_item}>Item 1</td>
-							<td className={styles.row_item}>Item 2</td>
-							<td className={styles.row_item}>Item 3</td>
-							<td className={styles.row_item}>Item 4</td>
-						</tr>
-						<tr className={styles.row}>
-							<td className={styles.row_item}>Item 5</td>
-							<td className={styles.row_item}>Item 6</td>
-							<td className={styles.row_item}>Item 7</td>
-							<td className={styles.row_item}>Item 8</td>
-						</tr>
-						<tr className={styles.row}>
-							<td className={styles.row_item}>Item 1</td>
-							<td className={styles.row_item}>Item 2</td>
-							<td className={styles.row_item}>Item 3</td>
-							<td className={styles.row_item}>Item 4</td>
-						</tr>
+						{data.map((item, i) => {
+							return (
+								<tr key={i} className={styles.row}>
+									{headers.map((header, i) => {
+										return <td className={styles.row_item}>{item[header.value]}</td>;
+									})}
+								</tr>
+							);
+						})}
 					</tbody>
 				</table>
 			</div>
