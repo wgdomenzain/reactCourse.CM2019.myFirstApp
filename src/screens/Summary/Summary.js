@@ -5,8 +5,8 @@ import summaryHeaders from '../../resources/jsons/summaryHeaders.json';
 import summaryData from '../../resources/jsons/summaryData.json';
 import { IconTable, IconChart } from '../../resources/svg/Icons';
 import produce from 'immer/dist/immer';
-import { Bar } from 'react-chartjs-2';
-import 'chartjs-plugin-annotation';
+import SimpleBarChart from '../../components/Chart/SimpleBarChart';
+import StackedBarChart from '../../components/Chart/StackedBarChart';
 
 export default (class Summary extends React.PureComponent {
 	state = {
@@ -14,21 +14,7 @@ export default (class Summary extends React.PureComponent {
 			table: true,
 			chart: false
 		},
-		data: {
-			labels: [],
-			datasets: [
-				{
-					label: 'My Second dataset',
-					fillColor: 'rgba(0,191,255,0.5)',
-					strokeColor: 'rgba(0,191,255,0.8)',
-					highlightFill: 'rgba(100,149,237,0.75)',
-					highlightStroke: 'rgba(100,149,237,1)',
-					data: [ 10, 11, 12 ],
-					borderColor: 'grey',
-					borderWidth: 1
-				}
-			]
-		}
+		data: []
 	};
 
 	componentDidMount() {
@@ -36,10 +22,17 @@ export default (class Summary extends React.PureComponent {
 	}
 
 	init = () => {
+		let array = [];
+		summaryData.forEach((item, i) => {
+			const element = {
+				name: item.name,
+				online: item.summary[0].value,
+				boxoffice: item.summary[1].value
+			};
+			array = array.concat(element);
+		});
 		const nextState = produce(this.state, (draft) => {
-			summaryData.forEach((item, i) => {
-				draft.data.labels = draft.data.labels.concat(item.name);
-			});
+			draft.data = array;
 		});
 		this.setState(nextState);
 		console.log('TCL: Summary -> init -> nextState', nextState);
@@ -55,28 +48,7 @@ export default (class Summary extends React.PureComponent {
 	};
 	render() {
 		const { selected, data } = this.state;
-		const data2 = Object.assign({}, data);
-
-		console.log('TCL: Summary -> render -> data2', data2);
-		console.log('TCL: Summary -> render -> data', data);
 		const headers = summaryHeaders;
-		const options = {
-			annotation: {
-				annotations: [
-					{
-						drawTime: 'afterDatasetsDraw',
-						borderColor: 'red',
-						borderDash: [ 2, 2 ],
-						borderWidth: 2,
-						mode: 'vertical',
-						type: 'line',
-						value: 10,
-						scaleID: 'x-axis-0'
-					}
-				]
-			},
-			maintainAspectRation: false
-		};
 
 		return (
 			<div className={styles.main}>
@@ -105,7 +77,8 @@ export default (class Summary extends React.PureComponent {
 				)}
 				{selected.chart && (
 					<div className={styles.chart}>
-						<Bar data={data2} width={100} height={50} options={options} />
+						<SimpleBarChart data={data} />
+						<StackedBarChart data={data} />
 					</div>
 				)}
 			</div>
