@@ -1,9 +1,9 @@
 import React from 'react';
-import { Route, Redirect, withRouter, Link } from 'react-router-dom';
+import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
-import Switch from 'react-router-dom/es/Switch';
 import Topbar from './components/Topbar/Topbar';
 import Home from './screens/Home/Home';
+import Tables from './screens/Tables/Tables';
 import Users from './screens/Users/Users';
 
 export default withRouter(
@@ -14,6 +14,7 @@ export default withRouter(
 					<Topbar />
 					<Switch>
 						<RouteWithTitle exact title="Inicio" path="/inicio" component={Home} />
+						<RouteWithTitle exact title="Tablas" path="/tablas" component={Tables} />
 						<RouteWithTitle exact title="Usuarios" path="/usuarios" component={Users} />
 						<Redirect to={'/inicio'} />
 					</Switch>

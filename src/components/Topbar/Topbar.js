@@ -14,7 +14,7 @@ export default (class Topbar extends React.PureComponent {
 					<Link className={styles.item} to="/inicio">
 						<li className={styles.item}> Tableros</li>
 					</Link>
-					<Link className={styles.item} to="/tabla">
+					<Link className={styles.item} to="/tablas">
 						<li className={styles.item}> Tablas</li>
 					</Link>
 					<Link className={styles.item} to="/usuarios">
