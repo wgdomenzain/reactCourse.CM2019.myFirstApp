@@ -1,7 +1,21 @@
 import * as React from 'react';
 import styles from './Table.module.scss';
+import CurrencyFormat from 'react-currency-format';
 
 export default (class Table extends React.PureComponent {
+	formatData = (data, type) => {
+		switch (type) {
+			case 'text':
+				return data;
+			case 'number':
+				return data.toLocaleString(navigator.language, { minimumFractionDigits: 0 });
+			case 'money':
+				return <CurrencyFormat value={data} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true} />;
+			default:
+				return data;
+		}
+	};
+
 	calculateFooter = (data, item) => {
 		switch (item.footer) {
 			case 'sum':
@@ -34,7 +48,7 @@ export default (class Table extends React.PureComponent {
 									{headers.map((header, i) => {
 										return (
 											<td key={i} className={styles.row_item}>
-												{item[header.value]}
+												{this.formatData(item[header.value], header.type)}
 											</td>
 										);
 									})}
@@ -47,7 +61,7 @@ export default (class Table extends React.PureComponent {
 							{headers.map((header, i) => {
 								return (
 									<td key={i} className={styles.footer_item}>
-										{this.calculateFooter(data, header)}
+										{this.formatData(this.calculateFooter(data, header), header.type)}
 									</td>
 								);
 							})}
