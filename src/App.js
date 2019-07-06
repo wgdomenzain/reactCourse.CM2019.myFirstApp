@@ -4,6 +4,7 @@ import DocumentTitle from 'react-document-title';
 import Topbar from './components/Topbar/Topbar';
 import Home from './screens/Home/Home';
 import Tables from './screens/Tables/Tables';
+import Summary from './screens/Summary/Summary';
 import Users from './screens/Users/Users';
 
 export default withRouter(
@@ -15,6 +16,7 @@ export default withRouter(
 					<Switch>
 						<RouteWithTitle exact title="Inicio" path="/inicio" component={Home} />
 						<RouteWithTitle exact title="Tablas" path="/tablas" component={Tables} />
+						<RouteWithTitle exact title="Tablas" path="/resumen" component={Summary} />
 						<RouteWithTitle exact title="Usuarios" path="/usuarios" component={Users} />
 						<Redirect to={'/inicio'} />
 					</Switch>
