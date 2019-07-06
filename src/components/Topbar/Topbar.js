@@ -12,13 +12,13 @@ export default (class Topbar extends React.PureComponent {
 			<div className={styles.main}>
 				<ul className={styles.list}>
 					<Link className={styles.item} to="/inicio">
-						<li className={styles.item}> Tableros</li>
+						<li className={styles.item}> Inicio</li>
 					</Link>
 					<Link className={styles.item} to="/tablas">
 						<li className={styles.item}> Tablas</li>
 					</Link>
 					<Link className={styles.item} to="/usuarios">
-						<li className={styles.item}> Reporte</li>
+						<li className={styles.item}> Usuarios</li>
 					</Link>
 				</ul>
 			</div>
