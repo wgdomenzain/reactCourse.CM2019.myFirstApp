@@ -48,7 +48,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } fro
 
 export default class Example extends React.PureComponent {
 	render() {
-		const { data } = this.props;
+		const { data, x, y1, y2 } = this.props;
 		return (
 			<BarChart
 				width={700}
@@ -61,12 +61,14 @@ export default class Example extends React.PureComponent {
 					bottom: 5
 				}}>
 				<CartesianGrid strokeDasharray="3 3" />
-				<XAxis dataKey="name" />
-				<YAxis />
+				<XAxis dataKey={x} />
+
+				<YAxis yAxisId="left" />
+				<YAxis yAxisId="right" orientation="right" />
 				<Tooltip />
 				<Legend />
-				<Bar dataKey="online" fill="#8884d8" />
-				<Bar dataKey="boxoffice" fill="#82ca9d" />
+				<Bar dataKey={y1} yAxisId="left" fill="#8884d8" />
+				<Bar dataKey={y2} yAxisId="right" fill="#82ca9d" />
 			</BarChart>
 		);
 	}
