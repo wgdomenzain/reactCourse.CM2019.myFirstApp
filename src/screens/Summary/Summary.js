@@ -35,7 +35,6 @@ export default (class Summary extends React.PureComponent {
 			draft.data = array;
 		});
 		this.setState(nextState);
-		console.log('TCL: Summary -> init -> nextState', nextState);
 	};
 
 	onHandleIcon = (item) => {

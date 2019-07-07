@@ -49,7 +49,6 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } fro
 export default class Example extends React.PureComponent {
 	render() {
 		const { data } = this.props;
-		console.log('TCL: Example -> render -> data', data);
 		return (
 			<BarChart
 				width={700}
