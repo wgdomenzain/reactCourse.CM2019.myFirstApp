@@ -6,6 +6,7 @@ import Home from './screens/Home/Home';
 import Report from './screens/Report/Report';
 import Summary from './screens/Summary/Summary';
 import Users from './screens/Users/Users';
+import Date from './screens/Date/Date';
 
 export default withRouter(
 	class App extends React.PureComponent {
@@ -18,6 +19,7 @@ export default withRouter(
 						<RouteWithTitle exact title="Tablas" path="/reporte" component={Report} />
 						<RouteWithTitle exact title="Tablas" path="/resumen" component={Summary} />
 						<RouteWithTitle exact title="Usuarios" path="/usuarios" component={Users} />
+						<RouteWithTitle exact title="Fechas" path="/fechas" component={Date} />
 						<Redirect to={'/inicio'} />
 					</Switch>
 				</div>
