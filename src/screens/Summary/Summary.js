@@ -76,7 +76,7 @@ export default (class Summary extends React.PureComponent {
 				)}
 				{selected.chart && (
 					<div className={styles.chart}>
-						<SimpleBarChart data={data} />
+						<SimpleBarChart data={data} y1={'online'} y2={'boxoffice'} y1Axis={'left'} y2Axis={'left'} />
 						<StackedBarChart data={data} />
 					</div>
 				)}

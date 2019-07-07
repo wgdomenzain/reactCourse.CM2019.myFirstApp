@@ -61,7 +61,7 @@ export default (class Report extends React.PureComponent {
 				{selected.table && <Table data={data} headers={headers} />}
 				{selected.chart && (
 					<div className={styles.chart}>
-						<SimpleBarChart data={data} x={'zone'} y1={'sold'} y2={'total'} />
+						<SimpleBarChart data={data} x={'zone'} y1={'sold'} y2={'total'} y1Axis={'left'} y2Axis={'right'} />
 					</div>
 				)}
 			</div>
