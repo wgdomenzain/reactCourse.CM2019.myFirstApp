@@ -5,6 +5,7 @@ const url = 'https://anapioficeandfire.com/api/characters';
 const urlFakeApi = 'https://reqres.in/api/';
 const urlWeatherApi = 'http://api.openweathermap.org/data/2.5/weather?';
 const keyWeatherApi = 'appid=d0b76fd83718eef1932b224506cfb48f';
+const urlCountries = 'https://restcountries.eu/rest/v2/name/';
 
 export default {
 	async createFakeApi({ name, job }) {
@@ -23,5 +24,8 @@ export default {
 	async getWeatherByCityId({ cityId }) {
 		console.log('TCL: getWeatherByCityId -> cityId', cityId);
 		return await WebService.get(urlWeatherApi + 'id=' + cityId + '&' + keyWeatherApi);
+	},
+	async getCountryDetails({ country }) {
+		return await WebService.get(urlCountries + country + '?fullText=true');
 	}
 };
