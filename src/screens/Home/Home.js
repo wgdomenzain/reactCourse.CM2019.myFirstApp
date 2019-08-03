@@ -4,11 +4,15 @@ import WebServices from '../../WebServices/WebServices';
 import produce from 'immer/dist/immer';
 import { aliases } from './Helper';
 
+import { css } from '@emotion/core';
+import { ClipLoader } from 'react-spinners';
+
 export default (class Home extends React.PureComponent {
 	state = {
 		response: {},
 		cities: [ { name: 'Culiacán', id: 4012176 }, { name: 'Oaxaca', id: 3522507 }, { name: 'Guadalajara', id: 8133378 }, { name: 'Mazatlán', id: 3996322 }, { name: 'Monterrey', id: 3995465 } ],
-		selectedCity: [ { name: 'Culiacán', id: '4012176' } ]
+		selectedCity: [ { name: 'Culiacán', id: '4012176' } ],
+		loading: true
 	};
 
 	componentDidMount() {
@@ -23,13 +27,18 @@ export default (class Home extends React.PureComponent {
 
 	getCityWeaether = async (cityId) => {
 		try {
+			const nextState = produce(this.state, (draft) => {
+				draft.loading = true;
+			});
+			this.setState(nextState);
 			const response = await WebServices.getWeatherByCityId({
 				cityId: cityId
 			});
-			const nextState = produce(this.state, (draft) => {
+			const nextState2 = produce(this.state, (draft) => {
 				draft.response = response;
+				draft.loading = false;
 			});
-			this.setState(nextState);
+			this.setState(nextState2);
 			console.log('TCL: getCityWeaether -> response', response);
 		} catch (e) {}
 	};
@@ -67,7 +76,7 @@ export default (class Home extends React.PureComponent {
 	};
 
 	render() {
-		const { response, cities } = this.state;
+		const { response, cities, loading } = this.state;
 		const iconUrl = response && response.weather && 'http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png';
 		console.log('TCL: render -> iconUrl', iconUrl);
 		console.log('TCL: Home -> render -> response', response);
@@ -92,7 +101,13 @@ export default (class Home extends React.PureComponent {
 						<li>Temp Min: {response && response.main && response.main.temp_min}</li>
 						<li>Temp Máx: {response && response.main && response.main.temp_max}</li>
 					</ul>
-					<img src={iconUrl} alt="" />
+					{!loading ? (
+						<img src={iconUrl} alt="" />
+					) : (
+						<div className="sweet-loading">
+							<ClipLoader sizeUnit={'px'} size={50} color={'#123abc'} loading={this.state.loading} />
+						</div>
+					)}
 				</div>
 			</div>
 		);
