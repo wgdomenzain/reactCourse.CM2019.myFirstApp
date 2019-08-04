@@ -71,3 +71,9 @@
 	text-align: center;
 	color: blue;
 }
+
+@media print {
+	.table {
+		width: 200px;
+	}
+}

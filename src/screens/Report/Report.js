@@ -3,10 +3,12 @@ import styles from './Report.module.scss';
 import Table from '../../components/Table/Table';
 import cashoutHeader from '../../resources/jsons/cashoutHeader.json';
 import cashoutData from '../../resources/jsons/cashoutData.json';
-import { IconTable, IconChart } from '../../resources/svg/Icons';
+import { IconTable, IconChart, IconPDF } from '../../resources/svg/Icons';
 import produce from 'immer/dist/immer';
 import SimpleBarChart from '../../components/Chart/SimpleBarChart';
 import StackedBarChart from '../../components/Chart/StackedBarChart';
+import Pdf from 'react-to-pdf';
+const ref = React.createRef();
 export default (class Report extends React.PureComponent {
 	state = {
 		selected: {
@@ -48,8 +50,12 @@ export default (class Report extends React.PureComponent {
 		const { selected } = this.state;
 		const headers = cashoutHeader;
 		const data = cashoutData[0].cashout;
+		const options = {
+			orientation: 'landscape',
+			width: 5
+		};
 		return (
-			<div className={styles.main}>
+			<div ref={ref} className={styles.main}>
 				<div className={styles.icons}>
 					<div className={styles.container_icon} onClick={() => this.onHandleIcon('table')}>
 						<IconTable className={selected.table ? styles.icon_selected : styles.icon} />
@@ -57,6 +63,13 @@ export default (class Report extends React.PureComponent {
 					<div className={styles.container_icon} onClick={() => this.onHandleIcon('chart')}>
 						<IconChart className={selected.chart ? styles.icon_selected : styles.icon} />
 					</div>
+					<Pdf targetRef={ref} filename="code-example.pdf" options={options}>
+						{({ toPdf }) => (
+							<div className={styles.container_icon} onClick={toPdf}>
+								<IconPDF className={selected.chart ? styles.icon_selected : styles.icon} />
+							</div>
+						)}
+					</Pdf>
 				</div>
 				{selected.table && <Table data={data} headers={headers} />}
 				{selected.chart && (
