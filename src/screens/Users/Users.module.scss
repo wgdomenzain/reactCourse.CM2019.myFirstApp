@@ -1,6 +1,21 @@
 * {
 	box-sizing: border-box;
 }
+.main {
+	display: flex;
+	flex-direction: row;
+}
+.data {
+	flex: 1;
+}
+.container_button {
+	flex: 0.2;
+	padding: 8px;
+}
+.button {
+	cursor: pointer;
+	outline: none;
+}
 .country {
 	color: black;
 }
