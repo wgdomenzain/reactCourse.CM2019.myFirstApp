@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styles from './Users.module.scss';
 import WebServices from '../../WebServices/WebServices';
+import Pdf from 'react-to-pdf';
+const ref = React.createRef();
 
 export default (class Users extends React.PureComponent {
 	state = {
@@ -41,7 +43,7 @@ export default (class Users extends React.PureComponent {
 		const { response, countries } = this.state;
 		return (
 			<div className={styles.main}>
-				<div className={styles.data}>
+				<div ref={ref} className={styles.data}>
 					<ul>
 						{countries.map((country, i) => {
 							return (
@@ -75,9 +77,17 @@ export default (class Users extends React.PureComponent {
 					</ul>
 				</div>
 				<div className={styles.container_button}>
-					<button className={styles.button} onClick={() => this.generatePDF()}>
+					<Pdf targetRef={ref} filename="code-example.pdf">
+						{({ toPdf }) => (
+							<button className={styles.button} onClick={toPdf}>
+								PDF
+							</button>
+						)}
+					</Pdf>
+
+					{/* <button className={styles.button} onClick={() => this.generatePDF()}>
 						PDF
-					</button>
+					</button> */}
 				</div>
 			</div>
 		);
