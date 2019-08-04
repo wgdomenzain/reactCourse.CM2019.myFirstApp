@@ -2,7 +2,35 @@ import * as React from 'react';
 import styles from './Users.module.scss';
 import WebServices from '../../WebServices/WebServices';
 import Pdf from 'react-to-pdf';
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
+
 const ref = React.createRef();
+
+const styles2 = StyleSheet.create({
+	page: {
+		flexDirection: 'row',
+		backgroundColor: '#E4E4E4'
+	},
+	section: {
+		margin: 10,
+		padding: 10,
+		flexGrow: 1
+	}
+});
+
+const MyDocument = () => (
+	<Document>
+		<Page size="A4" style={styles2.page}>
+			<View style={styles2.section}>
+				<Text>Section #1</Text>
+			</View>
+			<View style={styles2.section}>
+				<Text>Section #2</Text>
+			</View>
+		</Page>
+	</Document>
+);
 
 export default (class Users extends React.PureComponent {
 	state = {
@@ -38,6 +66,11 @@ export default (class Users extends React.PureComponent {
 
 	generatePDF = () => {
 		console.log('TCL: generatePDF');
+		return (
+			<PDFDownloadLink document={<MyDocument />} fileName="somename.pdf">
+				{({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+			</PDFDownloadLink>
+		);
 	};
 	render() {
 		const { response, countries } = this.state;
@@ -77,18 +110,21 @@ export default (class Users extends React.PureComponent {
 					</ul>
 				</div>
 				<div className={styles.container_button}>
-					<Pdf targetRef={ref} filename="code-example.pdf">
+					{/* <Pdf targetRef={ref} filename="code-example.pdf">
 						{({ toPdf }) => (
 							<button className={styles.button} onClick={toPdf}>
 								PDF
 							</button>
 						)}
-					</Pdf>
+					</Pdf> */}
 
-					{/* <button className={styles.button} onClick={() => this.generatePDF()}>
+					<button className={styles.button} onClick={() => this.generatePDF()}>
 						PDF
-					</button> */}
+					</button>
 				</div>
+				<PDFDownloadLink document={<MyDocument />} fileName="somename.pdf">
+					{({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Generar PDF!')}
+				</PDFDownloadLink>
 			</div>
 		);
 	}

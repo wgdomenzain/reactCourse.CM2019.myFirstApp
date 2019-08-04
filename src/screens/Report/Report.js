@@ -8,6 +8,7 @@ import produce from 'immer/dist/immer';
 import SimpleBarChart from '../../components/Chart/SimpleBarChart';
 import StackedBarChart from '../../components/Chart/StackedBarChart';
 import Pdf from 'react-to-pdf';
+import ReactToPdf from 'react-to-pdf';
 const ref = React.createRef();
 export default (class Report extends React.PureComponent {
 	state = {
@@ -15,7 +16,8 @@ export default (class Report extends React.PureComponent {
 			table: true,
 			chart: false
 		},
-		data: []
+		data: [],
+		print: false
 	};
 
 	componentDidMount() {
@@ -46,8 +48,16 @@ export default (class Report extends React.PureComponent {
 		this.setState(nextState);
 	};
 
+	generatePDF = () => {
+		console.log('TCL: Report -> generatePDF -> generatePDF');
+		const nextState = produce(this.state, (draft) => {
+			draft.print = true;
+		});
+		this.setState(nextState);
+	};
+
 	render() {
-		const { selected } = this.state;
+		const { selected, print } = this.state;
 		const headers = cashoutHeader;
 		const data = cashoutData[0].cashout;
 		const options = {
@@ -62,6 +72,10 @@ export default (class Report extends React.PureComponent {
 					</div>
 					<div className={styles.container_icon} onClick={() => this.onHandleIcon('chart')}>
 						<IconChart className={selected.chart ? styles.icon_selected : styles.icon} />
+					</div>
+
+					<div className={styles.container_icon} onClick={() => this.generatePDF()}>
+						<IconPDF className={selected.chart ? styles.icon_selected : styles.icon} />
 					</div>
 					<Pdf targetRef={ref} filename="code-example.pdf" options={options}>
 						{({ toPdf }) => (

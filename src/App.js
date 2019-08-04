@@ -7,6 +7,7 @@ import Report from './screens/Report/Report';
 import Summary from './screens/Summary/Summary';
 import Users from './screens/Users/Users';
 import Date from './screens/Date/Date';
+import Exports from './screens/Exports/Exports';
 
 export default withRouter(
 	class App extends React.PureComponent {
@@ -20,6 +21,7 @@ export default withRouter(
 						<RouteWithTitle exact title="Tablas" path="/resumen" component={Summary} />
 						<RouteWithTitle exact title="Usuarios" path="/usuarios" component={Users} />
 						<RouteWithTitle exact title="Fechas" path="/fechas" component={Date} />
+						<RouteWithTitle exact title="Exportar" path="/exportar" component={Exports} />
 						<Redirect to={'/inicio'} />
 					</Switch>
 				</div>
