@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "@react-pdf/renderer": "^1.6.3",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "chart.js": "^2.8.0",
     "chartjs-plugin-annotation": "^0.5.7",
     "immer": "^3.1.3",
